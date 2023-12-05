@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Controller
@@ -22,6 +23,8 @@ public class WelcomeController {
     }
 
     private String getMessage() {
+        // 2021-03-24 16:48:05.591
+        //Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         return "Hello World";
     }
 
