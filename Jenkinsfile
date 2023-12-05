@@ -1,5 +1,8 @@
 pipeline {
-  agent any
+  //agent any
+  agent {
+    label "jenkins-node"
+  }
   options {
     ansiColor('xterm')
   }
