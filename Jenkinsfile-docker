@@ -1,9 +1,9 @@
 pipeline {
   agent none
-  parameters {
-    string name: 'IMAGE_NAME', defaultValue: 'hello-world'
-    string name: 'IMAGE_REGISTRY_ACCOUNT', defaultValue: 'relaxmanitstime'
-  }
+//   parameters {
+//     string name: 'IMAGE_NAME', defaultValue: 'hello-world'
+//     string name: 'IMAGE_REGISTRY_ACCOUNT', defaultValue: 'relaxmanitstime'
+//   }
   stages {
     stage('Checkout') {
       agent any
@@ -30,20 +30,22 @@ pipeline {
     stage('Build Docker Image') {
       agent any
       steps {
-        sh "docker image build -t ${params.IMAGE_NAME} ."
+        sh "docker image build -t myhello ."
       }
     }
     stage('Tag Docker Image') {
       agent any
       steps {
-        sh "docker image tag ${params.IMAGE_NAME} ${params.IMAGE_REGISTRY_ACCOUNT}/${params.IMAGE_NAME}"
+        sh "docker image tag myhello relaxmanitstime/myhello:$BUILD_NUMBER"
+        sh "docker image tag myhello relaxmanitstime/myhello:latest"
       }
     }
     stage('Publish Docker Image') {
       agent any
       steps {
         withDockerRegistry(credentialsId: 'docker-hub-token', url: 'https://index.docker.io/v1/') {
-          sh "docker image push ${params.IMAGE_REGISTRY_ACCOUNT}/${params.IMAGE_NAME}"
+          sh "docker image push relaxmanitstime/myhello:$BUILD_NUMBER"
+          sh "docker image push relaxmanitstime/myhello:latest"
         }
       }
     }
@@ -53,7 +55,7 @@ pipeline {
       }
       steps {
         // sh 'docker -H tcp://<DOCKER_HOST_PRIVATE_IP>:2375 container run --detach --name <CONTAINER_NAME> -p 80:8080 <IMAGE>:$BUILD_NUMBER'
-        sh "docker -H tcp://172.31.21.166:2375 container run --detach --name ${params.IMAGE_NAME} -p 80:8080 ${params.IMAGE_REGISTRY_ACCOUNT}/${params.IMAGE_NAME}:$BUILD_NUMBER"
+        sh "docker -H tcp://172.31.21.166:2375 container run --detach --name myhello -p 80:8080 relaxmanitstime/myhello:$BUILD_NUMBER"
       }
     }
   }
