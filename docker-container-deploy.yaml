@@ -5,7 +5,7 @@
   - name: Create & Start Container
     docker_container:
       name: myhello
-      image: "relaxmanitstime:{{ lookup('env','BUILD_NUMBER') }}"
+      image: "relaxmanitstime/myhello:{{ lookup('env','BUILD_NUMBER') }}"
       state: started
       ports:
       - "80:8080"

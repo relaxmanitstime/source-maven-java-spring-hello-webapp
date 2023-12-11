@@ -48,7 +48,7 @@ pipeline {
     stage('Run Docker Container') {
       agent {
         docker {
-          image 'relaxmanitstime/jenkins-ansible'
+          image 'ghcr.io/relaxmanitstime/jenkins-ansible'
           args '-u 0:0 -e DOCKER_HOST=tcp://172.31.26.247:2375'
         }
       }
