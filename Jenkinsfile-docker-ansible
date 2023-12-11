@@ -49,7 +49,7 @@ pipeline {
       agent {
         docker {
           image 'relaxmanitstime/jenkins-ansible-agent'
-          args '-u 0:0 -e DOCKER_HOST=tcp://172.31.26.247:2375'
+          args '-u 0:0 -e DOCKER_HOST=tcp://172.31.21.166:2375'
         }
       }
       steps {
