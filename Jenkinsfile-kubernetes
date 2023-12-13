@@ -37,7 +37,7 @@ spec:
 '''
     }
   }
-  options {  
+  options {   
     ansiColor('xterm')
   }
   triggers {
