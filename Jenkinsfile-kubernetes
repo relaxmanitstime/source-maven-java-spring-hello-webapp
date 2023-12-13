@@ -40,6 +40,9 @@ spec:
   options {
     ansiColor('xterm')
   }
+  triggers {
+    githubPush()
+  }
   stages {
     stage('Checkout') {
       steps {
