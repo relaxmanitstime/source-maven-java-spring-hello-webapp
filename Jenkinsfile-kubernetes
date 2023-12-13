@@ -31,6 +31,9 @@ spec:
 '''
     }
   }
+  options {
+    ansiColor('xterm')
+  }
   stages {
     stage('Checkout') {
       steps {
